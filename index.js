@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database.js');
 
+const categoriesController = require('./categories/CategoriesController.js');
+const articlesController = require('./articles/ArticlesController.js');
+
 
 //view engine
 app.set('view engine', 'ejs');
@@ -16,8 +19,6 @@ app.use(bodyParser.json());
 
 //Database
 
-
-
 connection.authenticate()
     .then(()=>{
         console.log('conexão bd feita com sucesso')
@@ -27,6 +28,10 @@ connection.authenticate()
 
         console.log(error);
     })
+
+
+app.use("/", categoriesController);
+app.use('/', articlesController);
 
 
 app.get('/', (req, res)=>{
