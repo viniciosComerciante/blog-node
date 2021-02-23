@@ -1,0 +1,48 @@
+<%-include ('../../partials/header')%>
+
+
+<body>
+    <%-include ('../../partials/navbar')%>
+
+    <div class="container mt-5">
+        <h2 class="mb-5">Categorias</h2>
+        <a class="btn btn-success" href="/admin/categories/new">Criar nova categoria</a>
+        <table class="table mt-3">
+            
+            <thead >
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                
+                <%dados.forEach((dado, index)=>{%>
+                    <tr>
+                        <th><%=dado.id%></th>
+                        <th><%=dado.title%></th>
+                        <th><%=dado.slug%></th>
+                        <th>
+                            
+                            <button class="btn btn-warning">Editar</button>
+
+                            <form action="/categories/delete" method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="<%=dado.id%>">
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                            
+                        </th>
+                    </tr>
+                <%})%>
+         
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+<%-include ('../../partials/footer')%>
