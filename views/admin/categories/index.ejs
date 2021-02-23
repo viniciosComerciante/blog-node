@@ -28,9 +28,13 @@
                         <th><%=dado.slug%></th>
                         <th>
                             
-                            <button class="btn btn-warning">Editar</button>
+                           
+                            <a href="/admin/categories/edit/<%=dado.id%>" class="btn btn-warning">Editar</a>
+                            
+                            
+                            
 
-                            <form action="/categories/delete" method="post" style="display: inline;">
+                            <form action="/categories/delete" method="post" style="display: inline;" onsubmit="confirmarDelecao(event)">
                                 <input type="hidden" name="id" value="<%=dado.id%>">
                                 <button type="submit" class="btn btn-danger">Deletar</button>
                             </form>
@@ -46,3 +50,17 @@
 </body>
 
 <%-include ('../../partials/footer')%>
+
+<script>
+
+    function confirmarDelecao(event){
+
+        const decision = confirm("deseja realmente deletar esta categoria?");
+
+        if(!decision){
+            event.preventDefault();
+        }
+    }
+
+
+</script>
