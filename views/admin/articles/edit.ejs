@@ -17,12 +17,14 @@
 
         <div class="card mt-5">
             <div class="card-header">
-                <h2>Novo artigo</h2>
+                <h2>Edição de artigo</h2>
             </div>
             <div class="card-body">
-                <form action="/articles/save" method="POST">
+                <form action="/admin/articles/update" method="POST">
+
+
                     <label for="title">Titulo</label>
-                    <input class="form-control mb-3" type="text" name="title" placeholder="defina o titulo do artigo">
+                    <input class="form-control" type="text" name="title" placeholder="defina o titulo da categoria" value="<%=article.title%>">
 
                     <label for="category">Categoria</label>
                     <select name="category" id="category" class="form-control mb-3">
@@ -31,8 +33,13 @@
                         <%})%>
                     </select>
 
-                    <textarea class="form-control mt-3" id="mytextarea" name="body" placeholder="Escreva o artigo aqui" id="" cols="30" rows="10"></textarea>
-                    <button class="btn btn-success mt-3" type="submit">Cadastrar</button>
+                    <textarea class="form-control mt-3" id="mytextarea" name="body" placeholder="Escreva o artigo aqui" id=""><%=article.body%></textarea>
+
+
+                    <input type="hidden" name="id" value="<%=article.id%>">
+                    <button class="btn btn-success mt-3" type="submit">Atualizar</button>
+
+
                 </form>
             </div>
         </div>
