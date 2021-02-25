@@ -116,6 +116,9 @@ router.get("/articles/page/:num", (req, res)=>{
 
     //retorna todos os artigos e também retorana a quantidade de elementos existentes no banco de dados
     Article.findAndCountAll({
+        order:[
+            ['id', 'DESC']
+        ],
         limit: limit,
         offset: offset,
     }).then((articles)=>{
@@ -129,11 +132,16 @@ router.get("/articles/page/:num", (req, res)=>{
         }
 
         var result = {
+            page: parseInt(page),
             next: next,
             articles: articles,
         }
 
-        res.json(result);
+        Category.findAll().then(categories=>{
+            res.render('./admin/articles/page', {result: result, categories: categories});
+        })
+
+        
     })
 })
 
