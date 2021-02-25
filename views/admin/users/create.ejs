@@ -1,2 +1,29 @@
-<h1>Meu formulario
-</h1>
+<%-include ('../../partials/header')%>
+
+<body>
+    <%-include ('../../partials/navbar')%>
+    
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Criacao de usuario</h2>
+            </div>
+
+            <div class="card-body">
+                <form action="/users/create" method="post">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="email" name="email" placeholder="email@example.com.br">
+                    <label for="password">Senha</label>
+                    <input class="form-control" type="password" placeholder="password" name="password">
+                    <button type="submit" class="btn btn-success btn-block mt-3">Criar Usuario</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+<%-include ('../../partials/footer')%>
