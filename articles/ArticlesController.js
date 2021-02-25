@@ -102,6 +102,41 @@ router.post('/admin/articles/update', (req, res)=>{
 
 })
 
+router.get("/articles/page/:num", (req, res)=>{
+    const page = req.params.num;
+    let offset = 0;
+    const limit = 4;
+
+    if(isNaN(page) || page ==1){
+        offset = 0;
+    }
+    else{
+        offset = parseInt(page-1) * limit;
+    }
+
+    //retorna todos os artigos e também retorana a quantidade de elementos existentes no banco de dados
+    Article.findAndCountAll({
+        limit: limit,
+        offset: offset,
+    }).then((articles)=>{
+
+        var next;
+
+        if(offset + limit >= articles.count){
+            next = false;
+        }else{
+            next = true;
+        }
+
+        var result = {
+            next: next,
+            articles: articles,
+        }
+
+        res.json(result);
+    })
+})
+
 
 
 
