@@ -29,7 +29,12 @@
                     <label for="category">Categoria</label>
                     <select name="category" id="category" class="form-control mb-3">
                         <%categories.forEach((category)=>{%>
-                            <option value="<%=category.id%>"><%=category.title%></option>
+                            <%if(category.id == article.categoryId){%>
+                                <option value="<%=category.id%>" selected><%=category.title%></option>
+                            <%}else{%>
+
+                                <option value="<%=category.id%>"><%=category.title%></option>
+                            <%}%>
                         <%})%>
                     </select>
 

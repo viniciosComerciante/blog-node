@@ -7,7 +7,12 @@
     <div class="container mt-3" >
 
         <div class="jumbotron">
-            <h1 class="display-4">Bom dia!</h1>
+
+            <%if(category.title){%>
+                <h1 class="display-4"><%=category.title%></h1>
+            <%}else{%>
+                <h1 class="display-4">Bom dia!</h1>
+            <%}%>
             <p class="lead">Este é um simples blog criado com o intuito de desenvolver e mostrar os conhecimentos por mim adiquirios na parte back-end</p>
             <hr class="my-4">
             <p>Descrição detalhada aqui.</p>
