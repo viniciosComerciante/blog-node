@@ -20,7 +20,7 @@ const User = require('./user/User');
 app.use(session({
     secret: 'qualquercoisa',
     cookie: {
-        maxAge: 30000000,
+        maxAge: 1800000,
     }
 }))
 

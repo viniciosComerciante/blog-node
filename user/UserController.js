@@ -9,7 +9,6 @@ router.get('/admin/users', (req, res)=>{
             res.render('./admin/users/index', {users:users});
     })
 
-
 });
 
 
@@ -55,11 +54,44 @@ router.post("/users/create", (req, res)=>{
             
         }
     })
-
-
-    
-
 })
 
+router.get('/login', (req, res)=>{
+    res.render('./admin/users/login', {erro:''});
+})
+
+router.post("/authenticate", (req, res)=>{
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne({
+        where:{
+            email:email,
+        }
+    }).then((user)=>{
+        if(user!=undefined){
+            //validar senha
+            var correct = bcrypt.compareSync(password, user.password);
+
+            if(correct){
+                req.session.user = {
+                    id: user.id,
+                    email: user.email,
+                }
+
+                res.redirect('/admin/articles');
+
+            }
+            else{
+                res.render('./admin/users/login', {erro: "senha incorreta"})
+            }
+
+        }
+        else{
+            res.render('./admin/users/login', {erro: "usuario não encontrado"})
+        }
+    })
+
+});
 
 module.exports = router;
