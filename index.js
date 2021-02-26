@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+var session = require('express-session')
 const connection = require('./database/database.js');
 
 const categoriesController = require('./categories/CategoriesController.js');
@@ -11,6 +12,17 @@ const Article = require('./articles/ArticleModel');
 const Category = require('./categories/CategoryModel');
 const User = require('./user/User');
 
+
+// sessions
+
+// Redis
+
+app.use(session({
+    secret: 'qualquercoisa',
+    cookie: {
+        maxAge: 30000000,
+    }
+}))
 
 //view engine
 app.set('view engine', 'ejs');
@@ -38,6 +50,7 @@ connection.authenticate()
 app.use("/", categoriesController);
 app.use('/', articlesController);
 app.use('/', usersController); 
+
 
 
 app.get('/', (req, res)=>{
